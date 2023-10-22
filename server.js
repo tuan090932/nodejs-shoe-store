@@ -2,13 +2,16 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000; // Chọn cổng máy chủ
 
+const authRoute = require("./routes/auth")
+
+
 // Kết nối đến cơ sở dữ liệu MongoDB (đảm bảo bạn đã import connectDB từ tệp connectDB.js)
 const connectDB = require('./configs/database');
 connectDB();
 
 // Định nghĩa các tuyến đường (routes) của ứng dụng
 app.get('/', (req, res) => {
-  res.send('Chào mừng đến với ứng dụng của bạn!');
+  res.send('Chào mừng đến với ứng dụng của bạn!!!');
 });
 
 // Thêm tuyến đường khác tại đây
@@ -17,6 +20,13 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Ứng dụng đang chạy trên cổng ${port}`);
 });
+
+//ROUTES
+app.use("/v1/auth",authRoute);
+
+
+
+
 
 
 const ProductModel = require("./model/model");
